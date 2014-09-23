@@ -52,6 +52,9 @@ class colourChart {
     
   }
   
+  /**
+   * Choose custom size for output image
+   */
   public function chartSize($x, $y) {
   
     $this->chart_width = (int) $x;
@@ -59,12 +62,18 @@ class colourChart {
     
   }
   
+  /**
+   * Use this to omit the most common colour (possibly the background)
+   */
   public function ignoreFirst() {
   
     $this->ignore_first = TRUE;
     
   }
   
+  /**
+   * Increasing the sensitivty limits the number of colours in the output
+   */
   public function setSteps($steps) {
   
     $this->steps = (int) $steps;
@@ -73,6 +82,9 @@ class colourChart {
     
   }
   
+  /**
+   * Generate the array of colour frequencies, keyed by r:g:b:a
+   */
   public function countColours() {
   
     for ($x=0; $x<$this->width; ++$x) {
@@ -95,6 +107,9 @@ class colourChart {
     
   }
   
+  /**
+   * Generate the output graphic
+   */
   public function createChart() {
   
     $total_pixels = $this->width * $this->height;
@@ -105,8 +120,6 @@ class colourChart {
       array_shift($this->colours);
       
     }
-  
-    ob_start();
     
     $this->chart = imagecreatetruecolor($this->chart_width, $this->chart_height);
     imagealphablending($this->chart, FALSE);
@@ -126,12 +139,17 @@ class colourChart {
       $angle_start = $angle_end;
       
     }
+  
+    ob_start();
     
     imagepng($this->chart);
     
     return ob_get_clean();
   }
   
+  /**
+   * Output the original image
+   */
   public function originalImage() {
   
     ob_start();
@@ -155,12 +173,18 @@ class colourChart {
     
   }
   
+  /**
+   * Release system resources for an image
+   */
   public function destroyImage($image) {
   
     imagedestroy($this->$image);
     
   }
   
+  /**
+   * Determine the filetype from an uploaded file
+   */
   public static function typeFromUpload($file) {
   
     switch ($_FILES['file']['type']) {
@@ -187,6 +211,9 @@ class colourChart {
     }
   }
   
+  /**
+   * Determine the filetype of a linked image
+   */
   public static function typeFromFile($file) {
   
     if ($file == '') return NULL;
