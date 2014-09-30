@@ -6,11 +6,13 @@
 <body>
 <form method="post" enctype="multipart/form-data">
    <fieldset>
-      <input type="file" name="file" />
-      <input type="text" name="url"<?php if (isset($_POST['url'])) {echo " value=\"{$_POST['url']}\"";} ?> />
-      <input type="checkbox" name="ignore_first" id="ignore_first"<?php if (isset($_POST['ignore_first']) && strtolower($_POST['ignore_first']) === 'on') {echo ' checked="checked"';} ?> />
+      <input type="file" name="file" /><br />
+      <label for="url">Use URL</label>
+      <input id="url" type="text" name="url"<?php if (isset($_POST['url'])) {echo " value=\"{$_POST['url']}\"";} ?> /><br />
       <label for="ignore_first">Ignore Main Colour</label>
-      <input type="number" name="steps" value="<?php if (isset($_POST['steps'])) {echo $_POST['steps'];} else {echo 1;} ?>" />
+      <input type="checkbox" name="ignore_first" id="ignore_first"<?php if (isset($_POST['ignore_first']) && strtolower($_POST['ignore_first']) === 'on') {echo ' checked="checked"';} ?> /><br />
+      <label for="steps">Colour Steps</label>
+      <input id="steps" type="number" name="steps" value="<?php if (isset($_POST['steps'])) {echo $_POST['steps'];} else {echo 1;} ?>" /><br />
       <input type="submit" name="submit" value="Submit">
    </fieldset>
 </form>
