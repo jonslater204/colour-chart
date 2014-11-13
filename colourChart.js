@@ -92,7 +92,6 @@ function pieChart(e) {
    
    for (i in sort_colours) {
       end_angle = start_angle + 2 * Math.PI * sort_colours[i].count / total_pixels;
-      if (2 * Math.PI - end_angle < 0.01) break;
       pixel = sort_colours[i].pixel.split(':');
       context.fillStyle = 'rgba(' + pixel[0] + ', ' + pixel[1] + ', ' + pixel[2] + ', ' + (Math.round(pixel[3] / 2.55) / 100) + ')';
       context.beginPath();
@@ -100,6 +99,7 @@ function pieChart(e) {
       context.arc(size / 2, size / 2, size / 2, start_angle - shift_angle, end_angle - shift_angle);
       context.lineTo(size / 2, size / 2);
       context.fill();
+      if (2 * Math.PI - start_angle < 0.01) break;
       start_angle = end_angle;
    }
    
